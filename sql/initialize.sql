@@ -16,7 +16,8 @@ CREATE TABLE Artworks(
 	id INT PRIMARY KEY,
 	title VARCHAR(100),
 	created DATE,
-	source VARCHAR(500)
+	source VARCHAR(500),
+	approved BOOLEAN
 );
 
 CREATE TABLE Visitors(
@@ -94,20 +95,20 @@ CREATE TABLE IsMedium(
 
 INSERT INTO Galleries VALUES
 	-- (id, title, description),
-	(0, 'My Gallery', 'This is a sample gallery to try some stuff out.'),
-	(1, 'Best of Picasso', 'Contains the most significant works of Pablo Picasso.'),
-	(2, 'Art Deco', 'Bringing you back to the 20s'),
-	(3, 'Modern Art', 'Collection of the greatest pieces of our time.');
+	(1000, 'My Gallery', 'This is a sample gallery to try some stuff out.'),
+	(1001, 'Best of Picasso', 'Contains the most significant works of Pablo Picasso.'),
+	(1002, 'Art Deco', 'Bringing you back to the 20s'),
+	(1003, 'Modern Art', 'Collection of the greatest pieces of our time.');
 
 INSERT INTO Artworks VALUES
 	-- (id, title, created, source),
-	(0, 'SQL is Art', '2022-03-30', 'https://www.lifewire.com/thmb/BEHQk8ko0QaYhxWslUcHj5mXK5I=/1187x782/filters:fill(auto,1)/info-database-schema-5c6c1494c9e77c000119fc1c.jpg'),
-	(1, 'Guernica', '1937-06-04', 'https://en.wikipedia.org/wiki/File:PicassoGuernica.jpg#/media/File:PicassoGuernica.jpg'),
-	(2, 'The Weeping Woman', '1937-11-26', 'https://en.wikipedia.org/wiki/File:Picasso_The_Weeping_Woman_Tate_identifier_T05010_10.jpg#/media/File:Picasso_The_Weeping_Woman_Tate_identifier_T05010_10.jpg'),
-	(3, 'Colony Hotel', '1935-07-14', 'https://blog.architizer.com/wp-content/uploads/colony-hotel-736-ocean-drive-miami-fl_9c5f5158-b4a3-4716-86f9-d6877667ae7a.jpeg'),
-	(4, 'Cincinnati Union Terminal', '1933-03-31', 'https://67sgp1evrnz1qlsujt24kbps-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/New_Image_2-1000px.jpg'),
-	(5, 'Country Road in Province By Night', '1890-05-01', 'https://commons.wikimedia.org/wiki/File:Vincent_van_Gogh_-_Road_with_Cypress_and_Star_-_c._12-15_May_1890.jpg#/media/File:Vincent_van_Gogh_-_Road_with_Cypress_and_Star_-_c._12-15_May_1890.jpg'),
-	(6, 'Courtesan', '1887-01-01', 'https://commons.wikimedia.org/wiki/File:Van_Gogh_-_la_courtisane.jpg#/media/File:Van_Gogh_-_la_courtisane.jpg');
+	(1000, 'SQL is Art', '2022-03-30', 'https://www.lifewire.com/thmb/BEHQk8ko0QaYhxWslUcHj5mXK5I=/1187x782/filters:fill(auto,1)/info-database-schema-5c6c1494c9e77c000119fc1c.jpg', true),
+	(1001, 'Guernica', '1937-06-04', 'https://upload.wikimedia.org/wikipedia/en/7/74/PicassoGuernica.jpg', true),
+	(1002, 'The Weeping Woman', '1937-11-26', 'https://upload.wikimedia.org/wikipedia/en/1/14/Picasso_The_Weeping_Woman_Tate_identifier_T05010_10.jpg', true),
+	(1003, 'Colony Hotel', '1935-07-14', 'https://blog.architizer.com/wp-content/uploads/colony-hotel-736-ocean-drive-miami-fl_9c5f5158-b4a3-4716-86f9-d6877667ae7a.jpeg', true),
+	(1004, 'Cincinnati Union Terminal', '1933-03-31', 'https://67sgp1evrnz1qlsujt24kbps-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/New_Image_2-1000px.jpg', true),
+	(1005, 'Country Road in Province By Night', '1890-05-01', 'https://krollermuller.nl/media/cache/collection_item_detail_small/media/collectionitempage/tmsImage/landweg-in-de-provence-bij-nacht-vincent-van-gogh-44552-copyright-kroller-muller-museum.jpg', true),
+	(1006, 'Courtesan', '1887-01-01', 'https://lh4.ggpht.com/2_qrfYPkO74k8GZFFLOQ_Ab4XQI2xN8GOw4ur4WA7TlO8P83oZESCd0vAj-VxA=s1200', true);
 
 INSERT INTO Visitors VALUES
 	-- (id, name),
@@ -148,73 +149,73 @@ INSERT INTO Mediums VALUES
 
 INSERT INTO FavoriteGallery VALUES
 	-- (visitorId, galleryId),
-	(0, 0),
-	(0, 2),
-	(1, 0),
-	(1, 1);
+	(1000, 1000),
+	(1000, 1002),
+	(1001, 1000),
+	(1001, 1001);
 
 INSERT INTO FavoriteArtist VALUES
 	-- (visitorId, artistId),
-	(0, 2),
-	(0, 3),
-	(1, 0),
-	(1, 2),
-	(1, 3);
+	(1000, 1002),
+	(1000, 1003),
+	(1001, 1000),
+	(1001, 1002),
+	(1001, 1003);
 
 INSERT INTO FavoriteArtwork VALUES
 	-- (visitorId, artworkId),
-	(0, 1),
-	(0, 3),
-	(1, 0),
-	(1, 2);
+	(1000, 1001),
+	(1000, 1003),
+	(1001, 1000),
+	(1001, 1002);
 
 INSERT INTO PreferredMedium VALUES
 	-- (visitorId, mediumType),
-	(0, 'oil paint'),
-	(0, 'ink and pen'),
-	(1, 'code'),
-	(1, 'watercolor');
+	(1000, 'oil paint'),
+	(1000, 'ink and pen'),
+	(1001, 'code'),
+	(1001, 'watercolor');
 
 INSERT INTO FeaturedArtwork VALUES
 	-- (galleryId, artworkId),
-	(0, 1),
-	(0, 3),
-	(0, 5),
-	(1, 1),
-	(1, 2),
-	(2, 3),
-	(2, 4),
-	(3, 5),
-	(3, 6);
+	(1000, 1001),
+	(1000, 1003),
+	(1000, 1005),
+	(1001, 1001),
+	(1001, 1002),
+	(1002, 1003),
+	(1002, 1004),
+	(1003, 1005),
+	(1003, 1006);
 
 INSERT INTO ManagesGallery VALUES
 	-- (visitorId, galleryId),
-	(0, 0),
-	(0, 1),
-	(0, 2),
-	(0, 3);
+	(1000, 1000),
+	(1000, 1001),
+	(1000, 1002),
+	(1000, 1003);
 
 INSERT INTO IsArtist VALUES
 	-- (visitorId, artistId),
-	(0, 1),
-	(0, 4);
+	(1000, 1000),
+	(1000, 1003);
 
 INSERT INTO CreatedBy VALUES
 	-- (artworkId, artistId),
-	(0, 1),
-	(1, 2),
-	(2, 2),
-	(3, 0),
-	(4, 0),
-	(5, 5),
-	(6, 5);
+	(1000, 1001),
+	(1001, 1002),
+	(1002, 1002),
+	(1003, 1000),
+	(1004, 1000),
+	(1005, 1005),
+	(1006, 1005);
 
 INSERT INTO IsMedium VALUES
 	-- (artworkId, mediumType),
-	(0, 'jpg'),
-	(1, 'oil paint'),
-	(2, 'oil paint'),
-	(3, 'architecture'),
-	(4, 'architecture'),
-	(5, 'oil paint'),
-	(6, 'oil paint');
+	(1000, 'jpg'),
+	(1001, 'oil paint'),
+	(1002, 'oil paint'),
+	(1003, 'architecture'),
+	(1004, 'architecture'),
+	(1005, 'oil paint'),
+	(1006, 'oil paint');

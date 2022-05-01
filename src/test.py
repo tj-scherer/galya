@@ -19,17 +19,6 @@ def test_schema():
 		print_query(query)
 		print()
 
-def test_insert():
-	query = \
-		'INSERT INTO visitors (id, name)' + \
-		'VALUES (4, \'test insert success!\')'
-	print(query)
-	cursor.execute(query)
-
-	# db.commit()
-
-	test_schema()
-
 if __name__ == '__main__':
 	db = sql.connect(
 	host = 'localhost',
@@ -39,4 +28,3 @@ if __name__ == '__main__':
 
 	cursor = db.cursor(buffered = True)
 	test_schema()
-	test_insert()
